@@ -9,9 +9,12 @@ var Engine = Matter.Engine,
 var engine = Engine.create(),
     world = engine.world;
 
+var score = 0; // Initialize score
+
+
 // Adjust the renderer options for a smaller box
 var render = Render.create({
-    element: document.body,
+    element: document.getElementById('game'),
     engine: engine,
     options: {
         width: 600, // Smaller width
@@ -75,6 +78,11 @@ Events.on(engine, 'collisionStart', function(event) {
             var newType = ballTypes[nextIndex];
             var newBall = createBall(newX, newY, newType.size, newType);
             World.add(world, newBall);
+
+            score += 10; // Increment score by 10, for example
+
+            // Update the score display in the HTML
+            document.getElementById('score').innerText = 'Score: ' + score;
         }
     });
 });
